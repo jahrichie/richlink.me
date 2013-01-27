@@ -1,4 +1,6 @@
 class LinksController < ApplicationController
+  
+
   # GET /links
   # GET /links.json
   def index
@@ -24,6 +26,7 @@ class LinksController < ApplicationController
   # GET /links/new
   # GET /links/new.json
   def new
+    @links = Link.all
     @link = Link.new
 
     respond_to do |format|
@@ -44,7 +47,7 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if @link.save
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
+        format.html { redirect_to root_url, notice: 'Link was successfully created.' }
         format.json { render json: @link, status: :created, location: @link }
       else
         format.html { render action: "new" }
