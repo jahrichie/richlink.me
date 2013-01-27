@@ -1,5 +1,6 @@
 class Link < ActiveRecord::Base
   attr_accessible :name, :url
+  require  'pismo'
   
   ################## VALIDATIONS
   validates_presence_of :url, :message => "cannot be blank"
@@ -8,5 +9,5 @@ class Link < ActiveRecord::Base
   ################## SCOPES
   default_scope order('created_at DESC')
 
- 
+  
 end

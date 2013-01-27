@@ -11,7 +11,7 @@
       </ul>
     </div>
   <% end %>
-  <%= f.hidden_field :name %>
+  <%= f.hidden_field :name, :value => @link_title %>
   <div class="field urlsaver">
     <%= f.label :url %><br />
       <% if params[:link].present? %>

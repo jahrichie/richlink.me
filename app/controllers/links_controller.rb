@@ -1,5 +1,13 @@
 class LinksController < ApplicationController
+  require 'pismo'
+  before_filter :pismo_grab_meta_data
+
+  def pismo_grab_meta_data
+    doc = Pismo::Document.new("http://google.com/")
+    @link_title = doc.title
+  end
   
+
 
   # GET /links
   # GET /links.json
@@ -25,7 +33,9 @@ class LinksController < ApplicationController
 
   # GET /links/new
   # GET /links/new.json
+
   def new
+    pismo_grab_meta_data
     @links = Link.all
     @link = Link.new
 
@@ -44,6 +54,7 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
+
     @link = Link.new(params[:link])
     @links = Link.all
     respond_to do |format|

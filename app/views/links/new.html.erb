@@ -4,11 +4,12 @@
         <%= render 'form' %>
         <%# link_to 'Back', links_path %>
     </div>
-    <div>
-      <h2 class="title">Show Links</h2>
-      <%= render 'show_all' %>
-    </div>          
-
+     <% if @links.size > 0  %>
+      <div>
+        <h2 class="title">Show Links</h2>
+        <%= render 'show_all' %>
+      </div>          
+     <% end %>
     </div>
     <!-- Liquid Slider Ends Here -->
   </div><!-- wrapper -->
