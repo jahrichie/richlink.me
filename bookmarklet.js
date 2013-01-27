@@ -1,0 +1,1 @@
+javascript:void(location.href='http://charitybuzz.dev:3000/?link='%20+%20encodeURIComponent(location.href));

@@ -36,7 +36,14 @@ div {
 }
 
 #notice {
-  color: green;
+  width:100%;
+  color: #FFF;
+  background:#97E96D;
+  text-align:center;
+  margin-top:0;
+  height:50px;
+  padding:10px;
+  line-height:50px;
 }
 
 .field_with_errors {

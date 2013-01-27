@@ -16,7 +16,7 @@ class LinksController < ApplicationController
   # GET /links/1.json
   def show
     @link = Link.find(params[:id])
-
+    @links = Link.all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @link }
@@ -38,16 +38,17 @@ class LinksController < ApplicationController
   # GET /links/1/edit
   def edit
     @link = Link.find(params[:id])
+    @links = Link.all
   end
 
   # POST /links
   # POST /links.json
   def create
     @link = Link.new(params[:link])
-
+    @links = Link.all
     respond_to do |format|
       if @link.save
-        format.html { redirect_to root_url, notice: 'Link was successfully created.' }
+        format.html { redirect_to root_url+"#show-links", notice: 'Link was successfully created.' }
         format.json { render json: @link, status: :created, location: @link }
       else
         format.html { render action: "new" }
@@ -60,10 +61,10 @@ class LinksController < ApplicationController
   # PUT /links/1.json
   def update
     @link = Link.find(params[:id])
-
+    @links = Link.all
     respond_to do |format|
       if @link.update_attributes(params[:link])
-        format.html { redirect_to @link, notice: 'Link was successfully updated.' }
+        format.html { redirect_to root_url+"#show-links", notice: 'Link was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,7 +80,7 @@ class LinksController < ApplicationController
     @link.destroy
 
     respond_to do |format|
-      format.html { redirect_to links_url }
+      format.html { redirect_to root_url+"#show-links", notice: 'Link was successfully deleted.' }
       format.json { head :no_content }
     end
   end

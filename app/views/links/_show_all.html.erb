@@ -1,0 +1,23 @@
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Url</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @links.each do |link| %>
+  <tr>
+    <td><%= link.name %></td>
+    <td><%= link.url %></td>
+    <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link) %></td>
+    <td><%= link_to '<i  class="icon-trash"> Destroy</i>'.html_safe, link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+
+</table>
+<%# will_paginate @links %>
+ 
+
+<%# link_to 'New Link', new_link_path %>

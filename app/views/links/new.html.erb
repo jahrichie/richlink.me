@@ -1,40 +1,14 @@
-<p id="notice"><%= notice %></p>
 <div class="liquid-slider"  id="slider-id">
-        <div>
-          <h2 class="title">Make Links</h2>
-            <h1>New link</h1>
-            <%= render 'form' %>
-            <%= link_to 'Back', links_path %>
-        </div>
-        <div>
-          <h2 class="title">Show Links</h2>
-<h1>Listing links</h1>
+    <div>
+      <h2 class="title">Make Links</h2>
+        <%= render 'form' %>
+        <%# link_to 'Back', links_path %>
+    </div>
+    <div>
+      <h2 class="title">Show Links</h2>
+      <%= render 'show_all' %>
+    </div>          
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Url</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @links.each do |link| %>
-  <tr>
-    <td><%= link.name %></td>
-    <td><%= link.url %></td>
-    <td><%= link_to 'Show', link %></td>
-    <td><%= link_to 'Edit', edit_link_path(link) %></td>
-    <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Link', new_link_path %>
-          
-        </div>          
-      </div>
-      <!-- Liquid Slider Ends Here -->
+    </div>
+    <!-- Liquid Slider Ends Here -->
   </div><!-- wrapper -->
