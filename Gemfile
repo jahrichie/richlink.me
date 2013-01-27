@@ -15,7 +15,7 @@ end
 
 #gem "haml", '3.0.25'
 gem 'thin'
-gem 'pismo' 
+#gem 'pismo' 
 gem "font-awesome-rails"
 gem 'will_paginate', '~> 3.0.0'
 gem 'heroku'
