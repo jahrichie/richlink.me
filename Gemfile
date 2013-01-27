@@ -5,13 +5,20 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+group :development, :test do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+end
+
 #gem "haml", '3.0.25'
 gem 'thin'
 gem 'pismo' 
 gem "font-awesome-rails"
 gem 'will_paginate', '~> 3.0.0'
-
+gem 'heroku'
 
 # Gems used only for assets and not required
 # in production environments by default.
