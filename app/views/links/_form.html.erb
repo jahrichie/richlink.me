@@ -1,4 +1,4 @@
-<%= form_for(@link, :html => { "data-behavior" => "submit-form"}) do |f| %>
+<%= form_for(@link, :html => { "data-behavior" => "submit-form", :class => 'clearfix'}) do |f| %>
   <% if @link.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@link.errors.count, "error") %> 
@@ -13,7 +13,7 @@
   <% end %>
   <%= f.hidden_field :name, :value => @link_title %>
   <div class="field urlsaver">
-    <%= f.label :url %><br />
+     
       <% if params[:autosave]  %>
         <%= f.text_field :url, :value => params[:autosave] %>
       <% else %>
@@ -21,7 +21,7 @@
       <% end %>
   </div>
   <div class="actions">
-    <%= f.submit 'Save', :class => 'btn' %>
+    <%= f.submit 'Save', :class => 'btn floatLeft' %>
   </div>
 <% end %>
 

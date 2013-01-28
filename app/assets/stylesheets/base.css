@@ -11,9 +11,39 @@ JAHS LINKS STYLE
 
 
 .urlsaver input  {
+  float:left;
   border-radius: 6px;
   padding: 14px;
   width: 500px;
   border: 1px solid #ccc;
   box-shadow: 0 0 3px rgba(0,0,0,0.5);
+  margin-bottom:50px;
+  margin-right:50px;
+  margin-left:120px;
+}
+
+.actions .btn{
+height: 47px;
+}
+
+/* FLASH NOTICES*/
+#error_explanation {
+color:red;
+}
+
+#notice {
+  width:100%;
+  color: #FFF;
+  background:#97E96D;
+  text-align:center;
+  margin-top:0;
+  height:50px;
+  padding:10px;
+  line-height:50px;
+}
+
+/*UTILITIES*/
+
+.floatLeft {
+  float:left;
 }

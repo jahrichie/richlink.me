@@ -6,7 +6,7 @@ class Link < ActiveRecord::Base
   validates_presence_of :url, :message => "cannot be blank"
   validates_uniqueness_of :url, :message => "Rich has this links, yo."
 
-  ################## SCOPES
+  ################## SCOPES ##################
   default_scope order('created_at DESC')
 
   
