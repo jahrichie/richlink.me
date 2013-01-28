@@ -1,6 +1,6 @@
 class Link < ActiveRecord::Base
   attr_accessible :name, :url
-  require  'pismo'
+  #require  'pismo'
   
   ################## VALIDATIONS
   validates_presence_of :url, :message => "cannot be blank"

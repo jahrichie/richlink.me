@@ -1,5 +1,5 @@
 class LinksController < ApplicationController
-  require 'pismo'
+ # require 'pismo'
   # before_filter :pismo_grab_meta_data
 
   # def pismo_grab_meta_data
