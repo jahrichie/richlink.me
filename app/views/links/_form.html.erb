@@ -14,8 +14,8 @@
   <%= f.hidden_field :name, :value => @link_title %>
   <div class="field urlsaver">
     <%= f.label :url %><br />
-      <% if params[:link].present? %>
-        <%= f.text_field :url, :value => params[:link] %>
+      <% if params[:autosave]  %>
+        <%= f.text_field :url, :value => params[:autosave] %>
       <% else %>
         <%= f.text_field :url %>
       <% end %>
@@ -25,4 +25,13 @@
   </div>
 <% end %>
 
+<% if params[:autosave] %>
+      <script>
+        $(function() {
+          $('[data-behavior~=submit-form]').submit();
+        });
+      </script> 
+<% end %>
+
  
+
