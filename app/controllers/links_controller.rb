@@ -1,24 +1,24 @@
 class LinksController < ApplicationController
  # require 'pismo'
-  # before_filter :pismo_grab_meta_data
+ #  before_filter :pismo_grab_meta_data
 
-  # def pismo_grab_meta_data
-  #   doc = Pismo::Document.new("http://google.com/")
-  #   @link_title = doc.title
-  # end
+ #  def pismo_grab_meta_data
+ #    doc = Pismo::Document.new("http://www.rubyflow.com/items/4082")
+ #    @link_title = doc.author
+ #  end
   
 
 
   # GET /links
   # GET /links.json
-  def index
-    @links = Link.all
+  # def index
+  #   @links = Link.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @links }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html # index.html.erb
+  #     format.json { render json: @links }
+  #   end
+  # end
 
   # GET /links/1
   # GET /links/1.json
@@ -35,7 +35,7 @@ class LinksController < ApplicationController
   # GET /links/new.json
 
   def new
-    #pismo_grab_meta_data
+    # pismo_grab_meta_data
     @links = Link.all
     @link = Link.new
 

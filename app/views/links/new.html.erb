@@ -1,15 +1,32 @@
+<div class="logo">
+  <%=  link_to '<i class="icon-link"></i>'.html_safe, root_url, :class => 'removeborder' %> 
+</div>
+
+<div class="slideNav navbar clearfix">
+  <div class="navbar-inner">
+    <ul class="nav" data-liquidslider-ref="slider-id">
+      <li><a href="#make-links" data-liquidslider-ref="slider-id">Make a Link</a></li>
+      <li><a href="#show-links" data-liquidslider-ref="slider-id">Show links</a></li>
+      <li><a href="javascript:void(location.href='http://safe-bastion-2847.herokuapp.com/?autosave='%20+%20encodeURIComponent(location.href));">Bookmarklet</a></li>
+
+    </ul>
+  </div>
+</div>
+
+
+
 <div class="liquid-slider"  id="slider-id">
-    <div>
-      <h2 class="title">Make Links</h2>
-        <%= render 'form' %>
-        <%# link_to 'Back', links_path %>
-    </div>
-     <% if @links.size > 0  %>
-      <div>
-        <h2 class="title">Show Links</h2>
-        <%= render 'show_all' %>
-      </div>          
-     <% end %>
-    </div>
-    <!-- Liquid Slider Ends Here -->
-  </div><!-- wrapper -->
+  <div>
+    <h2 class="title">Make Links</h2>
+    <%= render 'form' %>
+    <%# link_to 'Back', links_path %>
+  </div><!-- end make links slide -->
+ <% if @links.size > 0  %>
+  <div>
+    <h2 class="title">Show Links</h2>
+    <%= render 'show_all' %>
+  </div>  <!-- end show links slide -->     
+ <% end %>
+</div><!-- end slider-id -->
+<br><br><br>   
+ 

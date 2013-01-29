@@ -5,13 +5,22 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+   
+
 
 </head>
 <body>
   <% if notice %>
-    <p id="notice"><%= notice %></p>
+    <p id="notice" data-behavior="slideUp">
+      <%= notice %>
+      <a href="javascript:void(0);" data-behavior="closeMe" class="removeborder"> 
+        <i class="icon-remove"> &nbsp;</i>
+      </a>
+    </p>
   <% end  %>
+
   <div id="wrapper">
     <%= yield %>
+  </div><!-- end wrapper -->
 </body>
 </html>

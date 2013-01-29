@@ -1,4 +1,5 @@
 
+
 <table class="table">
   <tr>
     <th>Name</th>
@@ -8,7 +9,7 @@
   </tr>
 
 <% @links.each do |link| %>
-  <tr>
+  <tr class="<%= "ID#{link.id}" %>">
     <td><%= link.name %></td>
     <td><%= link.url %></td>
     <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link) %></td>

@@ -1,14 +1,31 @@
 /*
-JAHS LINKS STYLE
+JAHS LINKS GRABBER
+
 */
+body {
+  background:rgba(0,0,0,0.5) url(/assets/bg.png) no-repeat top center !important;
+  margin-bottom:50px;
+
+}
 
 #wrapper {
   width:980px;
   margin:0 auto;  
   margin-top:50px;
+
 }
 
+#slider-id,.editWrapper {
+min-height:300px;
+box-shadow: 0 0 3px rgba(200,200,200,0.5);
+border-radius: 16px;  
+/*padding-top:75px;*/
+}
 
+.editWrapper{
+    padding-top:50px;
+    background: #f2f2f2;
+}
 
 .urlsaver input  {
   float:left;
@@ -20,30 +37,51 @@ JAHS LINKS STYLE
   margin-bottom:50px;
   margin-right:50px;
   margin-left:120px;
+  height:40px !important;
 }
 
 .actions .btn{
 height: 47px;
 }
 
-/* FLASH NOTICES*/
-#error_explanation {
-color:red;
+
+/* NAVIGATION */
+.slideNav {
+ width:375px;
+ float:right; 
 }
+
+.logo {
+font-size: 2em;
+position: absolute;
+margin-left: 30px;
+margin-top: -7px;
+}
+.logo a { font-size:2em; }
+
+/* FLASH NOTICES*/
+#error_explanation {color:red;}
 
 #notice {
   width:100%;
-  color: #FFF;
-  background:#97E96D;
+  color: #000;
+  font-weight:bold;
   text-align:center;
+  line-height:50px;
+
+  background:#97E96D url(/assets/bg.png) no-repeat top center !important;
   margin-top:0;
   height:50px;
   padding:10px;
-  line-height:50px;
+
 }
 
-/*UTILITIES*/
+/* UTILITIES */
 
 .floatLeft {
   float:left;
+}
+.removeborder {
+  border:0 !important;
+  text-decoration: none  !important;
 }

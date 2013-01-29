@@ -1,6 +1,6 @@
-/*!*********************************************************************
+/***********************************************************************
 *
-*  Liquid Slider 1.1
+*  Liquid Slider 0.1
 *  Kevin Batdorf
 *
 *  http://liquidslider.kevinbatdorf.com
@@ -9,8 +9,9 @@
 *
 ************************************************************************/
 
-/*jslint bitwise: true, browser: true */
-/*global $, jQuery */
+/*jslint bitwise: true */
+/*jslint browser: true*/
+/*global $, jQuery, window, document*/
 
 // Utility for creating objects in older browsers
 if (typeof Object.create !== 'function') {
@@ -45,7 +46,7 @@ if (typeof Object.create !== 'function') {
 			// Variable for the % sign if needed (responsive), otherwise px
 			self.pSign =  (self.options.responsive) ? '%' : 'px';
 
-			// Slide animations bad in ie7, so don't animate height
+			// Slide animations bad in ie7, so use fade (fixed?)
 			if (((navigator.appVersion.indexOf("MSIE 7.") !== -1) || navigator.appVersion.indexOf("MSIE 8.") !== -1)) {
 				//self.options.slideEaseFunction = "fade";
 				self.dontAnimateHeight = true;
@@ -81,7 +82,7 @@ if (typeof Object.create !== 'function') {
 				self.loaded = true;
 				self.clickable = true;
 				// This will adjust the slider's height in case of images, etc.
-				self.adjustHeightNoAnimation();
+				self.adjustHeight();
 				// Adjust the width after load (IE won't otherwise).
 				if (self.options.responsive) {self.responsiveEvents(self.loaded); }
 
@@ -89,9 +90,7 @@ if (typeof Object.create !== 'function') {
 
 				self.readyToSlide = true;
 
-				// Adjust the height again (Chrome seems to like this)
-				self.adjustHeightNoAnimation();
-				self.transition();
+
 			});
 		},
 
@@ -121,7 +120,7 @@ if (typeof Object.create !== 'function') {
 			}
 			// Disable CSS transitions if the width is wider than the max
 			// Some features are disabled or different when using CSS transitions
-			if (document.documentElement.clientWidth > self.options.useCSSMaxWidth) {self.useCSS = false; }
+			if ($(window).outerWidth() > self.options.useCSSMaxWidth) {self.useCSS = false; }
 
 			// Disable some buggy settings for css transitions(for now)
 			// Preloader also works differently
@@ -235,7 +234,7 @@ if (typeof Object.create !== 'function') {
 							if (($this).toLowerCase() === self.hashValue.toLowerCase()) {
 								self.hashValue = parseInt(n + 1, 10);
 								// Adjust if continuous
-								if (self.panelCount && self.options.continuous && self.hashValue === 1) { self.hashValue = self.panelCount - 1; }
+								if (self.panelCount && self.options.continuous && self.hashValue === 1) {self.hashValue = self.panelCount - 1;}
 								return false;
 							}
 						}
@@ -297,9 +296,9 @@ if (typeof Object.create !== 'function') {
 
 			// Apply starting height to the container
 			if (self.options.autoHeight && !self.options.responsive) {
-				self.adjustHeightNoAnimation($($(self.panelContainer).children()[self.currentTab]).height() + ~~($(self.sliderId + '-wrapper .liquid-nav-right').height()) + self.pSign);
+				(self.$sliderId).css('height', $($(self.panelContainer).children()[self.currentTab]).height() + ~~($(self.sliderId + '-wrapper .liquid-nav-right').height()) + self.pSign);
 			} else if (!self.options.preloader) {
-				self.adjustHeightNoAnimation($($(self.panelContainer).children()[self.currentTab]).height());
+				(self.$sliderId).css('height', $($(self.panelContainer).children()[self.currentTab]).height());
 			}
 
 			// Build navigation tabs
@@ -461,8 +460,8 @@ if (typeof Object.create !== 'function') {
 					self.rightArrow = self.sliderId + '-wrapper [class^=liquid-nav-right]';
 					self.$leftArrow  = $(self.leftArrow);
 					self.$rightArrow = $(self.rightArrow);
-					(self.$leftArrow).css({visibility: "hidden", opacity: 0});
-					(self.$rightArrow).css({visibility: "hidden", opacity: 0});
+					(self.$leftArrow).css({visibility: "hidden"});
+					(self.$rightArrow).css({visibility: "hidden"});
 				}
 				// Add a margin to the top of responsive arrows
 				if (self.options.responsive && self.options.dynamicArrows && !self.options.dynamicArrowsGraphical && (self.options.dynamicTabsAlign !== 'center')) {
@@ -484,7 +483,7 @@ if (typeof Object.create !== 'function') {
 					$(this).show().css({visibility: "hidden"});
 				});
 				if ((self.$rightArrow).css('visibility') === 'hidden' && (!self.options.hoverArrows || self.hoverOn)) {
-					(self.$rightArrow).css({opacity: 1, visibility: "visible"});
+					(self.$rightArrow).css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, self.options.hideSideArrowsDuration * 3);
 				}
 			} else if (self.currentTab === (self.panelCount - (~~(self.options.continuous) * 2) - 1) || self.currentTab === -1) {
 				// Fade out the right and make sure the left is faded in (used for on load)
@@ -492,7 +491,7 @@ if (typeof Object.create !== 'function') {
 					$(this).show().css({visibility: "hidden"});
 				});
 				if ((self.$leftArrow).css('visibility') === 'hidden' && (!self.options.hoverArrows || self.hoverOn)) {
-					(self.$leftArrow).css({opacity: 1, visibility: "visible"});
+					(self.$leftArrow).css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, self.options.hideSideArrowsDuration * 3);
 				}
 			} else if (!self.options.hoverArrows || self.hoverOn) {
 				// Fade in on all other tabs
@@ -518,11 +517,7 @@ if (typeof Object.create !== 'function') {
 			$(self.sliderId + ' .panel').css('width', 100 / self.panelCount + self.pSign);
 
 			// Set the initial height
-			if (!self.options.autoHeight) {
-				(self.$sliderId).css('height', self.getHeighestPanel() + 'px');
-			} else {
-				//self.adjustHeightNoAnimation();
-			}
+			if (!self.options.autoHeight) { (self.$sliderId).css('height', self.getHeighestPanel() + 'px'); }
 
 			// Cache the padding for add/removing arrows
 			if (self.options.hideArrowsWhenMobile) {
@@ -550,14 +545,11 @@ if (typeof Object.create !== 'function') {
 			// Change navigation if the user resizes the screen.
 			if (self.options.responsive) {
 				$(window).bind('resize', function () {
+					//This way we know the window is being resized.
+					self.resizing = true;
 					self.responsiveEvents();
 
-					clearTimeout(self.resizingTimeout);
-					self.resizingTimeout = setTimeout(function () {
-					// Send to adjust the height after resizing completes
-						self.adjustHeight();
-						self.transition();
-					}, 500);
+			//if ((self.$sliderId).outerWidth() > self.options.useCSSMaxWidth && self.useCSS) {self.useCSS = false; }
 				});
 			}
 		},
@@ -567,9 +559,9 @@ if (typeof Object.create !== 'function') {
 				mobileNavChangeOver;
 
 			if (self.options.responsive) {
-				mobileNavChangeOver = (self.options.mobileUIThreshold || (self.totalNavWidth + 10 || self.options.hideArrowsThreshold));
+				mobileNavChangeOver = (self.options.mobileUIThreshold || self.totalNavWidth + 10);
 				if ((self.$sliderId).outerWidth() < mobileNavChangeOver) {
-					if (self.options.mobileNavigation && self.totalNavWidth) {
+					if (self.options.mobileNavigation) {
 						(self.$sliderNavUl).css('display', 'none');
 						$(self.sliderId + '-wrapper .liquid-slider-select-box').css('display', 'block');
 						$(self.sliderId + '-nav-select').css('display', 'block');
@@ -593,7 +585,7 @@ if (typeof Object.create !== 'function') {
 					if (self.options.hideArrowsWhenMobile && self.options.dynamicArrows && !($(self.leftArrow).length || $(self.rightArrow).length)) {
 						self.addArrows();
 						self.registerArrows();
-					} else if (!self.options.dynamicArrowsGraphical && self.options.dynamicArrows) {
+					} else if (!self.options.dynamicArrowsGraphical) {
 						(self.$leftArrow).css('margin-' + self.options.dynamicTabsPosition, (self.$sliderNavUl).css('height'));
 						(self.$rightArrow).css('margin-' + self.options.dynamicTabsPosition, (self.$sliderNavUl).css('height'));
 					}
@@ -602,25 +594,29 @@ if (typeof Object.create !== 'function') {
 				$(self.sliderId + '-wrapper').css('width', '100%');
 
 				// Set the width to slide
-				self.slideWidth = $(self.sliderId).outerWidth(true);
+				self.slideWidth = $(self.sliderId).width();
+				// Send to adjust the height
+				self.adjustHeight();
+				self.transition();
 			}
+
 		},
 
 		registerArrows: function () {
 			var self = this;
 			// CLick arrows
 			if (self.options.dynamicArrows) {
-				$((self.$sliderWrap).find('[class^=liquid-nav-]')).on('click', function () {
+				$((self.$sliderWrap).find('[class^=liquid-nav-]')).on('click', function (e) {
 
 					// These prevent clicking when in continuous mode, which would break it otherwise.
-					if (!self.clickable) { return false; }
-					if (typeof self.options.callforwardFunction === 'function') { self.animationCallForward(true); }
+					if (!self.clickable && self.options.continuous) { return false; }
 					self.setCurrent($(this).attr('class').split('-')[2]);
+					if (self.options.continuous) { self.clickable = false; }
 					if (typeof self.options.callbackFunction === 'function') { self.animationCallback(true); }
 					return false;
 				});
-				self.checkAutoSlideStop();
 			}
+
 		},
 
 		registerCrossLinks: function () {
@@ -629,43 +625,41 @@ if (typeof Object.create !== 'function') {
 			if (self.options.crossLinks) {
 				// Re calculate cross links (for applying current tabs)
 				self.$crosslinks = $('[data-liquidslider-ref*=' + (self.sliderId).split('#')[1] + ']');
-				(self.$crosslinks).on('click', function () {
+				(self.$crosslinks).on('click', function (e) {
+					self.readyToScroll = true; // For scrollTop()
 
-
-					if (!self.clickable) {return false; }
+					if (!self.clickable && self.options.continuous) {return false; }
 					// Stop and Play controls
-					// When the user presses stop
 					if (self.options.autoSlideControls) {
 						if ($(this).attr('name') === 'stop') {
+							$(this).html(self.options.autoSlideStartText).attr('name', 'start');
 							self.options.autoSlide = false;
-							clearTimeout(self.autoslideTimeout);
-							$(this).html(self.options.autoSlideStartText);
-							$(this).attr('name', 'start');
+							self.checkAutoSlideStop();
 							return false;
 						}
-						// When the user presses play
 						if ($(this).attr('name') === 'start') {
-							$(this).html(self.options.autoSlideStopText);
+							$(this).html(self.options.autoSlideStopText).attr('name', 'stop');
 							self.autoSlideStopped = false;
 							self.options.autoSlide = true;
 							self.hover();
-							self.setCurrent(self.options.autoSliderDirection);
+							self.setCurrent(self.currentTab + 1);
 							self.autoSlide();
-							$(this).attr('name', 'stop');
 							return false;
 						}
 					}
-					if (typeof self.options.callforwardFunction === 'function') { self.animationCallForward(true); }
 					// Stores the clicked data-liquidslider-ref and checks if it is a # or left or right
 					var direction = ($(this).attr('href').split('#')[1]);
 					if (direction  === 'left' || direction === 'right') {
 						self.setCurrent(direction);
 					} else if (self.options.hashCrossLinks) {
 						self.getHashTags('#' + direction);
-						self.setCurrent(parseInt(self.hashValue - 1, 10));
+						self.currentTab = self.hashValue - ~~(self.options.continuous);
+						self.setCurrent();
+
 					} else {
 						self.setCurrent(parseInt(direction - 1, 10));
 					}
+					if (self.options.continuous) {self.clickable = false; }
 					self.checkAutoSlideStop();
 					if (typeof self.options.callbackFunction === 'function') { self.animationCallback(true); }
 					return false;
@@ -681,29 +675,36 @@ if (typeof Object.create !== 'function') {
 
 			// Click tabs
 			if (self.options.dynamicTabs) {
-				(self.$sliderWrap).find('[class^=liquid-nav] li').on('click', function () {
+				(self.$sliderWrap).find('[class^=liquid-nav] li').on('click', function (e) {
 
-					if (!self.clickable) {return false; }
-					if (typeof self.options.callforwardFunction === 'function') { self.animationCallForward(true); }
+					if (!self.clickable && self.options.continuous) {return false; }
 					self.setCurrent(parseInt($(this).attr('class').split('tab')[1], 10) - 1);
+					if (self.options.continuous) {self.clickable = false; }
 					if (typeof self.options.callbackFunction === 'function') { self.animationCallback(true); }
 					return false;
 				});
 			}
 
-			// Click to stop autoslider
-			(self.$sliderWrap).find('*').on('click', function () {
-				if (!self.options.autoSlidePauseOnHover || self.options.autoSlideStopWhenClicked) {
-					// AutoSlide controls.
-					self.checkAutoSlideStop();
+			// Click to stop (or pause) autoslider
+			(self.$sliderWrap).find('*').on('click', function (e) {
 
-					// Stops from speedy clicking for continuous sliding.
-					if (self.options.continuous) {clearTimeout(self.continuousTimeout); }
+				self.readyToScroll = true; // For scrollTop()
+
+				// AutoSlide controls.
+				self.checkAutoSlideStop();
+
+				if (self.options.autoSlide) {
+					if (!self.options.autoSlideStopWhenClicked) {
+						self.clickable = true;
+					}
 				}
+				// Stops from speedy clicking for continuous sliding.
+				if (self.options.continuous) {clearTimeout(self.continuousTimeout); }
+
 			});
 
 			// Enable Hover Events
-			if (self.options.autoSlidePauseOnHover || (self.options.hoverArrows && self.options.dynamicArrows)) {
+			if (self.options.autoSlidePauseOnHover || (self.options.hoverArrows && self.options.dynamicArrows) ) {
 				self.hoverable = true;
 				self.hover();
 			}
@@ -713,6 +714,7 @@ if (typeof Object.create !== 'function') {
 
 			// Enable Keyboard Events
 			if (self.options.keyboardNavigation) {self.keyboard(); }
+
 		},
 
 		hover: function () {
@@ -757,9 +759,17 @@ if (typeof Object.create !== 'function') {
 					// Pause on Hover
 					if (self.options.autoSlidePauseOnHover && self.options.autoSlide && self.clickable) {
 						self.dontCallback = false;
-						var isAnimating = $('.panel-container:animated');
-						if (!self.autoSlideStopped && !~~isAnimating) {
-							self.autoSlide(clearTimeout(self.autoslideTimeout));
+						var isAnimating = $('.' + self.panelContainer.attr('class') + ':animated').hasClass(self.panelContainer.attr('class'));
+						if (!self.autoSlideStopped && !isAnimating) {
+							if (!self.options.autoSlideStopWhenClicked) {
+								self.hoverTimeout = setTimeout(function () {
+									self.setCurrent(self.options.autoSliderDirection);
+									self.autoSlide();
+								}, self.options.autoSlideInterval);
+							} else {
+								self.setCurrent(self.options.autoSliderDirection);
+								self.autoSlide();
+							}
 						}
 					}
 				}
@@ -772,7 +782,6 @@ if (typeof Object.create !== 'function') {
 			
 			var self = this;
 				$(self.sliderId + ' .panel').on('touchstart', function (e) {
-					if (typeof self.options.callforwardFunction === 'function') { self.animationCallForward(true); }
 					
 					var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
 					// Starting point
@@ -809,7 +818,7 @@ if (typeof Object.create !== 'function') {
 			// Keyboard Events
 			var self = this;
 			$(document).keydown(function (event) {
-				if (typeof self.options.callforwardFunction === 'function') { self.animationCallForward(true); }
+				self.readyToScroll = true; // For scrollTop()
 				var key = event.keyCode || event.which;
 				if (event.target.type !== 'textarea' && event.target.type !== 'textbox') {
 					if (key === self.options.leftKey) {
@@ -824,7 +833,7 @@ if (typeof Object.create !== 'function') {
 						}
 					});
 				}
-				self.clickable = false;
+				if (self.options.continuous) { self.clickable = false; }
 				self.checkAutoSlideStop();
 				if (typeof self.options.callbackFunction === 'function') { self.animationCallback(true); }
 			});
@@ -833,7 +842,6 @@ if (typeof Object.create !== 'function') {
 		setCurrent: function (direction) {
 			var self = this;
 			if (self.clickable) {
-				self.clickable = false;
 				if (typeof direction === 'number') {
 					self.currentTab = direction;
 				} else {
@@ -869,7 +877,7 @@ if (typeof Object.create !== 'function') {
 				if (self.options.crossLinks) {
 					(self.$crosslinks).each(function () {
 						if (self.options.hashCrossLinks) {
-							if ($(this).attr('href') === ('#' + $($(self.panelContainer).children()[(self.setTab + ~~(self.options.continuous))]).find(self.options.panelTitleSelector).text().replace(/(\s)/g, '-').toLowerCase())) {
+							if ( $(this).attr('href') === ('#' + $($(self.panelContainer).children()[(self.setTab + 1)]).find(self.options.panelTitleSelector).text().replace(/(\s)/g, '-').toLowerCase()) ) {
 								$('.currentCrossLink').removeClass('currentCrossLink');
 								$(this).addClass('currentCrossLink');
 							}
@@ -895,6 +903,7 @@ if (typeof Object.create !== 'function') {
 					(self.$rightArrow).css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, self.options.hideSideArrowsDuration * 3);
 				}
 
+
 				this.transition();
 			}
 		},
@@ -912,9 +921,8 @@ if (typeof Object.create !== 'function') {
 			self.setHeight = (self.setHeight < currentPanelHeight) ? self.setHeight : currentPanelHeight;
 
 			self.setHeight = (self.setHeight < self.options.autoHeightMin) ? self.options.autoHeightMin : self.setHeight;
-			if (!self.removePre) {
+			if (!self.loaded) {
 				// Only run once
-				self.removePre = true;
 				return self.removePreloader();
 
 			}
@@ -936,12 +944,14 @@ if (typeof Object.create !== 'function') {
 			var self = this;
 
 			// Adjust the height
-			if (self.options.autoHeight && (self.useCSS || self.dontAnimateHeight)) {
+			if (self.options.autoHeight && self.loaded && (self.useCSS || self.dontAnimateHeight)) {
 				// CSS transitions or IE
-				self.adjustHeightNoAnimation(height);
-			} else if (self.options.autoHeight) {
+				$(self.panelContainer).parent().css({
+					'height': self.getHeight(height) + 'px'
+				});
+			} else if (self.options.autoHeight && self.loaded) {
 				// jQuery animations
-				(self.$sliderId).animate({
+				$(self.panelContainer).parent().animate({
 					'height': self.getHeight(height) + 'px'
 				}, {
 					easing: easing || self.options.autoHeightEaseFunction,
@@ -951,18 +961,13 @@ if (typeof Object.create !== 'function') {
 			}
 		},
 
-		adjustHeightNoAnimation: function (height) {
-			var self = this;
-			(self.$sliderId).css({
-				'height': self.getHeight(height) + 'px'
-			});
-		},
-
 		transition: function () {
 			var self = this;
+			// Adjust the scroll distance
+			if (self.options.topScrolling && !self.resizing && !self.useCSS && (self.readyToScroll || self.options.topScrollingOnLoad)) { self.scrollToTheTop(); }
 
 			// Adjust the height
-			if (self.options.autoHeight) { self.adjustHeight(); }
+			if (self.options.autoHeight && !self.resizing) { self.adjustHeight(); }
 
 
 			// Transition for fade option
@@ -971,7 +976,6 @@ if (typeof Object.create !== 'function') {
 					$($(self.panelContainer).children()[self.currentTab])
 						.fadeTo(self.options.slideEaseDuration, 1.0)
 						.siblings().css('display', 'none');
-					setTimeout(function () { self.continuousSlide(); }, self.options.slideEaseDuration + 50);
 				}
 			} else if (self.loaded || !self.useCSS) {
 				// Adjust the margin for continuous sliding
@@ -985,7 +989,7 @@ if (typeof Object.create !== 'function') {
 				// user clicks before fully loaded
 				if ((self.marginLeft + self.pSign) !== (self.panelContainer).css('margin-left') || (self.marginLeft !== -100)) {
 					// Animate the slider
-					if (self.useCSS && self.loaded) {
+					if (self.useCSS && self.loaded && !self.resizing) {
 						(self.panelContainer).css({
 							'-webkit-transform': 'translate3d(' + self.marginLeft + self.pSign + ', 0, 0)',
 							'-moz-transform': 'translate3d(' + self.marginLeft + self.pSign + ', 0, 0)',
@@ -993,9 +997,7 @@ if (typeof Object.create !== 'function') {
 							'-o-transform': 'translate3d(' + self.marginLeft + self.pSign + ', 0, 0)',
 							'transform': 'translate3d(' + self.marginLeft + self.pSign + ', 0, 0)'
 						});
-						// Timeout to replicate callback function
-						setTimeout(function () { self.continuousSlide(); }, self.options.slideEaseDuration + 50);
-					} else {
+					} else if (!self.resizing) {
 						(self.panelContainer).animate({
 							'margin-left': self.marginLeft + self.pSign
 						}, {
@@ -1013,6 +1015,22 @@ if (typeof Object.create !== 'function') {
 				// Match the slider margin with the width of the slider (better height transitions)
 				$(self.sliderId + '-wrapper').css('width', (self.$sliderId).outerWidth(true));
 			}
+			if (self.options.hideSideArrows && !self.options.hoverArrows) { self.hideArrows(); }
+			if (self.resizing) {
+				// Make sure the screen updates properly
+				self.resizing = false;
+				self.responsiveEvents();
+			}
+		},
+
+		scrollToTheTop: function () {
+			var self = this,
+				offset = (self.$sliderWrap).offset();
+				//minusTabs = (($(self.sliderId + '-nav-ul').height() || 0) + self.options.topScrollingExtraPixels);
+				// If the offset is larger than the panel height, scroll up the panel height
+			if (offset > self.setHeight) {
+				$('html, body').animate({'scrollTop': offset.top - self.options.topScrollingExtraPixels}, self.options.topScrollingDuration);
+			} //else { $('html, body').animate({'scrollTop': self.setHeight}, self.options.topScrollingDuration); }
 		},
 
 		animationCallback: function (go) {
@@ -1022,23 +1040,14 @@ if (typeof Object.create !== 'function') {
 			}
 		},
 
-		animationCallForward: function (go) {
-			var self = this;
-			if (!self.dontCallback || go) {
-				self.options.callforwardFunction.call(this);
-			}
-		},
-
 		autoSlide: function () {
 			var self = this;
-
 			// Can't set the autoslide slower than the easing ;-)
 			if (self.options.autoSlideInterval < self.options.slideEaseDuration) {
 				self.options.autoSlideInterval = (self.options.slideEaseDuration > self.options.autoHeightEaseDuration) ? self.options.slideEaseDuration : self.options.autoHeightEaseDuration;
 			}
-			//self.clickable = false;
+			if (self.options.continuous) {self.clickable = false; }
 			self.autoslideTimeout = setTimeout(function () {
-			if (typeof self.options.callforwardFunction === 'function' && self.loaded) { self.animationCallForward(); }
 				// Slide left or right
 				self.setCurrent(self.options.autoSliderDirection);
 				self.autoSlide();
@@ -1050,18 +1059,18 @@ if (typeof Object.create !== 'function') {
 		checkAutoSlideStop: function () {
 			var self = this;
 			// If the slider has not stopped, check whether it should stop
-			if (!self.autoSlideStopped && self.loaded) {
+			if (!self.autoSlideStopped) {
 				if (self.options.autoSlideStopWhenClicked) {
 					clearTimeout(self.autoslideTimeout);
 					self.autoSlideStopped = true;
 					if (self.options.autoSlideControls) {
 						$('body').find('[data-liquidslider-ref*=' + (self.sliderId).split('#')[1] + '][name=stop]').html(self.options.autoSlideStartText);
+						clearTimeout(self.autoslideTimeout);
 					}
-					
-				} else if (!self.options.hoverArrows && !self.options.autoSlidePauseOnHover) {
+				} else {
 					self.autoSlide(clearTimeout(self.autoslideTimeout));
+					self.clickable = true;
 				}
-				
 			}
 		},
 
@@ -1069,11 +1078,12 @@ if (typeof Object.create !== 'function') {
 			var self = this;
 
 			if (self.options.continuous) {
+
 				// If on the last panel (the clone of panel 1), set the margin to the original.
-				if (self.currentTab === self.panelCount - 2 || self.marginLeft === -((self.slideWidth * self.panelCount) - self.slideWidth)) {
+				if (self.currentTab === self.panelCount - 2) {
 					$(self.panelContainer).css('margin-left', -self.slideWidth + self.pSign);
 					self.currentTab = 0;
-				} else if (self.currentTab === -1 || self.marginLeft === 0) {
+				} else if (self.currentTab === -1) {
 				// If on the first panel the clone of the last panel), set the margin to the original.
 					$(self.panelContainer).css('margin-left', -(((self.slideWidth * self.panelCount) - (self.slideWidth * 2))) + self.pSign);
 					self.currentTab = (self.panelCount - 3);
@@ -1102,7 +1112,6 @@ if (typeof Object.create !== 'function') {
 
 		slideEaseDuration: 1500,
 		slideEaseFunction: "easeInOutExpo",
-		callforwardFunction: null,
 		callbackFunction: null,
 
 		autoSlide: false,
@@ -1156,12 +1165,19 @@ if (typeof Object.create !== 'function') {
 		mobileNavDefaultText: 'Menu',
 		mobileUIThreshold: 0,
 		hideArrowsWhenMobile: true,
-		hideArrowsThreshold: 481,
 		useCSSMaxWidth: 1030,
 
 		preloader: true,
 		preloaderFadeOutDuration: 250,
-		preloaderElements: 'img,video,iframe,object'
+		preloaderElements: 'img,video,iframe,object',
+
+		topScrolling: false,
+		topScrollingDuration: 1500,
+		topScrollingOnLoad: false,
+		topScrollingExtraPixels: 0
+
+		//setIeToFade:true (disabled for now)
+		//topScrollingOnAutoPlay: null  (potential feature)
 
 		//swipe: true,
 		//swipeThreshold: 100
