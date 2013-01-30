@@ -8,7 +8,7 @@ class LinksController < ApplicationController
  #  end
   
 
-
+  # NOT NEEDED USING THIS IN NEW
   # GET /links
   # GET /links.json
   # def index
@@ -20,11 +20,15 @@ class LinksController < ApplicationController
   #   end
   # end
 
+  def paginate_all_links
+    @links = Link.paginate(:page => params[:page], :per_page => 5)
+  end
+  
   # GET /links/1
   # GET /links/1.json
   def show
     @link = Link.find(params[:id])
-    @links = Link.all
+    paginate_all_links
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @link }
@@ -36,7 +40,7 @@ class LinksController < ApplicationController
 
   def new
     # pismo_grab_meta_data
-    @links = Link.all
+    paginate_all_links
     @link = Link.new
 
     respond_to do |format|
@@ -48,7 +52,7 @@ class LinksController < ApplicationController
   # GET /links/1/edit
   def edit
     @link = Link.find(params[:id])
-    @links = Link.all
+    paginate_all_links
   end
 
   # POST /links
@@ -56,7 +60,7 @@ class LinksController < ApplicationController
   def create
 
     @link = Link.new(params[:link])
-    @links = Link.all
+    paginate_all_links
     respond_to do |format|
       if @link.save
         format.html { redirect_to root_url+"#show-links", notice: 'Link was successfully created.' }
@@ -72,7 +76,7 @@ class LinksController < ApplicationController
   # PUT /links/1.json
   def update
     @link = Link.find(params[:id])
-    @links = Link.all
+    paginate_all_links
     respond_to do |format|
       if @link.update_attributes(params[:link])
         format.html { redirect_to root_url+"#show-links", notice: 'Link was successfully updated.' }
