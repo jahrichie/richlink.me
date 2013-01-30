@@ -1,10 +1,6 @@
-foo
-        <% form_tag request.path, :method => 'get' do %>
-          <% content_tag :label do %>
-            Search
-            <%= text_field_tag :search, params[:search] %>
-          <% end %>
-        <% end %>
+<form action="/#show-links" method="get" style="float:right">
+                <input type="text" name="search" placeholder="search?"><br>
+</form>
 
 <table class="table">
   <tr>
@@ -18,7 +14,7 @@ foo
   <tr class="<%= "ID#{link.id}" %>">
     <td><%= link.name %></td>
     <td><%= link_to "<i class='icon-external-link'></i> #{link.url}".html_safe, link.url, :target => "_blank" %></td>
-    <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link) %></td>
+    <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link), :class => 'fancy' %></td>
     <td><%= link_to '<i  class="icon-trash"> Destroy</i>'.html_safe, link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
@@ -26,4 +22,5 @@ foo
 </table>
  
  <%= will_paginate @collection, :renderer => BootstrapPagination::Rails %>
+
  
