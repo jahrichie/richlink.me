@@ -7,7 +7,7 @@ class Link < ActiveRecord::Base
   ################## 
   validates_presence_of :url, :message => " cannot be blank, that wouldn't be a url!"
   validates_uniqueness_of :url, :message => " has already been added"
-  #validates_format_of :url, :with => URI::regexp(%w(http https))
+  validates_format_of :url, :with => URI::regexp(%w(http https))
 
   ################## 
   
