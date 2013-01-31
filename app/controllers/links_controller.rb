@@ -1,12 +1,5 @@
 class LinksController < ApplicationController
- # require 'pismo'
- #  before_filter :pismo_grab_meta_data
 
- #  def pismo_grab_meta_data
- #    doc = Pismo::Document.new("http://www.rubyflow.com/items/4082")
- #    @link_title = doc.author
- #  end
-  
 
   # NOT NEEDED USING THIS IN NEW
   # GET /links
@@ -77,7 +70,11 @@ class LinksController < ApplicationController
     @link = Link.new(params[:link])
     doc = Pismo::Document.new(@link.url) 
     #grab metadata from url
-    @link.name = doc.title
+    if !doc.title.nil?
+      @link.name = doc.description
+    else
+      @link.name = doc.title
+    end
     @link.favicon = doc.favicon
 
     paginate_all_links

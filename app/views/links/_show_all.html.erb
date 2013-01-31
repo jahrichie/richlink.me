@@ -16,7 +16,7 @@
 <% @links.each do |link| %>
   <tr class="<%= "ID#{link.id}" %>">
     <td><%= image_tag link.favicon if link.favicon  %></td>
-    <td><%= link.name %></td>
+    <td style="max-width:400px"><%= link.name %></td>
     <td><%= link_to "<i class='icon-external-link'></i> #{truncate(link.url, :length => 60)}".html_safe, link.url, :target => "_blank" %></td>
 
    
