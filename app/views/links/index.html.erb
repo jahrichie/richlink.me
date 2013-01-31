@@ -1,25 +1,20 @@
-<h1>Listing links</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Url</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @links.each do |link| %>
-  <tr>
-    <td><%= link.name %></td>
-    <td><%= link.url %></td>
-    <td><%= link_to 'Show', link %></td>
-    <td><%= link_to 'Edit', edit_link_path(link) %></td>
-    <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Link', new_link_path %>
+<%= render 'navigation' %>
+<div class="liquid-slider"  id="slider-id">
+  <div class="formSlider">
+    <h2 class="title">Make Links</h2>
+    <%= render 'form' %>
+  </div><!-- end make links slide -->
+ <% if @links.size > 0  %>
+  <div>
+    <h2 class="title">Show Links</h2>
+    <%= render 'show_all' %>
+  </div>  <!-- end show links slide -->     
+ <% end %>
+  <div>
+    <h2 class="title">Bookmarklet</h2>
+      <a  href="javascript:void(location.href='<%= root_url %>?autosave='%20+%20encodeURIComponent(location.href));" style="text-align:center;width:300px"> Drag this link, or highlight the code below, and put it where your bookmarklets live. The and click it from any webpage you'd like him to read!</a>
+      <pre>javascript:void(location.href='<%= root_url %>?autosave='%20+%20encodeURIComponent(location.href));</pre>
+  </div>  <!-- end show links slide -->   
+</div><!-- end slider-id -->
+<br><br><br>   
+ 

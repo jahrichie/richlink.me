@@ -1,7 +1,8 @@
 Links::Application.routes.draw do
   resources :links
+  get "(?page=:page)#show-links" => "links#index"
   
-  root :to => "links#new"
+  root :to => "links#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

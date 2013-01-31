@@ -1,9 +1,12 @@
 <form action="/#show-links" method="get" style="float:right">
-                <input type="text" name="search" placeholder="search?"><br>
+                <input type="text" name="search" placeholder="search?" 
+                <% if params[:search] %>  value="<%= params[:search]%>"<% end %>               
+                ><br>
 </form>
 
 <table class="table">
   <tr>
+    <th></th>
     <th>Name</th>
     <th>Url</th>
     <th></th>
@@ -12,9 +15,13 @@
 
 <% @links.each do |link| %>
   <tr class="<%= "ID#{link.id}" %>">
+    <td><%= image_tag link.favicon if link.favicon  %></td>
     <td><%= link.name %></td>
-    <td><%= link_to "<i class='icon-external-link'></i> #{link.url}".html_safe, link.url, :target => "_blank" %></td>
-    <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link), :class => 'fancy' %></td>
+    <td><%= link_to "<i class='icon-external-link'></i> #{truncate(link.url, :length => 60)}".html_safe, link.url, :target => "_blank" %></td>
+
+   
+
+    <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link), :class => 'iframe', :id=> "various5" %></td>
     <td><%= link_to '<i  class="icon-trash"> Destroy</i>'.html_safe, link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>

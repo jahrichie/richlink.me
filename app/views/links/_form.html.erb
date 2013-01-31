@@ -1,7 +1,6 @@
-
-
 <%= form_for(@link, :html => { "data-behavior" => "submit-form", :class => 'clearfix'}) do |f| %>
   <% if @link.errors.any? %>
+
     <div id="error_explanation">
       <h2><%= pluralize(@link.errors.count, "error") %> 
         prohibited this link from being saved:
@@ -39,6 +38,6 @@
 
 
 <% end %>
-
+<div class="clearfix">&nbsp;</div>
  
 

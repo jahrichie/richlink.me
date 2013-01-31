@@ -1,6 +1,7 @@
  $(function(){
           //main coda slider call, doesn;t work with data-behavior
           $('#slider-id').liquidSlider({
+            responsive: true,
             autoSlide:false,
             autoHeight:true,
             preloader: true,

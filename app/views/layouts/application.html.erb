@@ -5,8 +5,25 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-   
+  <%= javascript_include_tag '/jquery.fancybox.js' %>  
+  <%= stylesheet_link_tag    "/jquery.fancybox.css" %>
 
+<script type="text/javascript">
+$(document).ready(function() {
+
+      
+  $("#various5").fancybox({
+    'width'       : '75%',
+    'height'      : '25%',
+        'autoScale'       : false,
+        'transitionIn'    : 'none',
+    'transitionOut'   : 'none',
+    'type'        : 'iframe'
+  });
+
+
+}); // end doc ready
+ </script>
 
 </head>
 <body>
@@ -18,7 +35,6 @@
       </a>
     </p>
   <% end  %>
-
   <div id="wrapper">
     <%= yield %>
   </div><!-- end wrapper -->

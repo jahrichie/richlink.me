@@ -20,8 +20,21 @@ class LinksController < ApplicationController
   #   end
   # end
 
+
   def paginate_all_links
     @links = Link.search(params[:search], params[:page])
+  end
+  
+
+  def index
+    # pismo_grab_meta_data
+    paginate_all_links
+    @link = Link.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @link }
+    end
   end
   
   # GET /links/1
@@ -51,8 +64,10 @@ class LinksController < ApplicationController
 
   # GET /links/1/edit
   def edit
+
     @link = Link.find(params[:id])
     paginate_all_links
+    render :layout => false
   end
 
   # POST /links
@@ -60,6 +75,11 @@ class LinksController < ApplicationController
   def create
 
     @link = Link.new(params[:link])
+    doc = Pismo::Document.new(@link.url) 
+    #grab metadata from url
+    @link.name = doc.title
+    @link.favicon = doc.favicon
+
     paginate_all_links
     respond_to do |format|
       if @link.save

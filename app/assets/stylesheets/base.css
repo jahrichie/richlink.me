@@ -11,13 +11,13 @@ body {
 #wrapper {
   width:980px;
   margin:0 auto;  
-  margin-top:50px;
+  margin-top:35px;
 
 }
 
 #slider-id,.editWrapper {
 margin
-min-height:300px;
+min-height:500px;
 box-shadow: 0 0 3px rgba(200,200,200,0.5);
 border-radius: 4px;  
 /*padding-top:75px;*/
