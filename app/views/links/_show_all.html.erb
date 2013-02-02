@@ -13,15 +13,23 @@
     <th></th>
   </tr>
 
+<script type="text/javascript">
+  $(function() {
+      
+      $(".<%= Link.first.id %>").css({ backgroundColor: "#FFFF88" }, 3000);
+    });
+
+</script>
+
 <% @links.each do |link| %>
-  <tr class="<%= "ID#{link.id}" %>">
+  <tr class="<%= link.id %>">
     <td><%= image_tag link.favicon, :height => "16px", :width => "16px" if link.favicon  %></td>
     <td style="max-width:400px"><%= link.name %></td>
     <td><%= link_to "<i class='icon-external-link'></i> #{truncate(link.url, :length => 60)}".html_safe, link.url, :target => "_blank" %></td>
 
    
 
-    <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link), :class => 'iframe', :id=> "various5" %></td>
+      <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link), :class => 'iframe', :id=> "various5" %></td>
     <td><%= link_to '<i  class="icon-trash"> Destroy</i>'.html_safe, link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>

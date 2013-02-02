@@ -1,15 +1,17 @@
 <%= form_for(@link, :html => { "data-behavior" => "submit-form", :class => 'clearfix'}) do |f| %>
   <% if @link.errors.any? %>
-
+    <style type="text/css">
+      .actions input,#link_url {border:1px solid red;}
+    </style>
     <div id="error_explanation">
       <h2><%= pluralize(@link.errors.count, "error") %> 
-        prohibited this link from being saved:
+         yo, please resolve!:
       </h2>
-      <ul>
+      <ol>
       <% @link.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
-      </ul>
+      </ol>
     </div>
   <% end %>
   <%= f.hidden_field :name, :value => @link_title %>
