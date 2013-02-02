@@ -5,9 +5,11 @@
   <div class="navbar-inner">
     <ul class="nav" data-liquidslider-ref="slider-id">
       <li><a href="#make-links"  data-liquidslider-ref="slider-id"><i class="icon-fire"></i>Make a Link</a></li>
-      <li><a href="#show-links"  data-liquidslider-ref="slider-id">
-        <i class="icon-eye-open"></i> Show links
+      <% if @links.size > 0  %>
+        <li><a href="#show-links"  data-liquidslider-ref="slider-id">
+          <i class="icon-eye-open"></i> Show links
       </a></li>
+      <% end %>
       <li><a href="#bookmarklet" data-liquidslider-ref="slider-id"><i class=""></i>Bookmarklet</a></li>
     </ul>
   </div>
