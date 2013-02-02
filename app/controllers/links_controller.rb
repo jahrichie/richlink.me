@@ -66,11 +66,10 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-
     @link = Link.new(params[:link])
     doc = Pismo::Document.new(@link.url) 
     #grab metadata from url
-    if !doc.title.nil?
+    if doc.title.nil?
       @link.name = doc.description
     else
       @link.name = doc.title
