@@ -13,7 +13,6 @@ group :production do
   gem 'pg'
 end
 
-#gem "haml", '3.0.25'
 gem 'thin'
 gem 'pismo' 
 
