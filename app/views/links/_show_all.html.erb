@@ -28,12 +28,13 @@
 
       <% if link.favicon %>
         <%= image_tag link.favicon, :height => "16px", :width => "16px" %>
-      <% elsif !link.url.split('/')[2].nil? %>
+      <% elsif !link.url.split('/')[2].nil? && !Rails.env == "development" %>
         <img src="<%= "http://" + link.url.split('/')[2]%>/favicon.ico"
         width="16px" height="16px">
+      <% else  %>
+      <span style="background:black;width:16px;height:16px;display:block;" > &nbsp; </span>       
       <% end %>
 
-      <%= link.url.split('/')[2]%>
 
     </td>
     <td style="max-width:400px"><%= link.name %></td>
