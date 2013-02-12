@@ -1,3 +1,4 @@
+
 <form action="/#show-links" method="get" style="float:right">
                 <input type="text" name="search" placeholder="search?" 
                 <% if params[:search] %>  value="<%= params[:search]%>"<% end %>               
@@ -26,13 +27,14 @@
     <td><%= image_tag link.favicon, :height => "16px", :width => "16px" if link.favicon  %></td>
     <td style="max-width:400px"><%= link.name %></td>
     <td><%= link_to "<i class='icon-external-link'></i> #{truncate(link.url, :length => 60)}".html_safe, link.url, :target => "_blank" %></td>
-
-   
-
       <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link), :class => 'iframe', :id=> "various5" %></td>
     <td><%= link_to '<i  class="icon-trash"> Destroy</i>'.html_safe, link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+<% if @links.size < 1 %>
+  <h2> No results, yo.</h2>
+<% end %>
+
 
 </table>
  

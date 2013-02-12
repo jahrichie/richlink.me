@@ -3,28 +3,59 @@ JAHS LINKS GRABBER
 
 */
 body {
-  background:transparent url(/assets/header-bg-50.png) repeat top center !important;
+  background: url(/assets/black-grad-bg.jpg) no-repeat center center fixed;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
   margin-bottom:50px;
 
 }
 
+
+/* SET SOME CUSTOM STYLES ON ALL FONT AWESOME CLASSES SON*/
+[class^="icon-"],
+[class*=" icon-"] {
+  color:#0088CC;
+}
+.icon-link {color:#FFF;}
+.icon-heart {color:#F42E46;}
+
+.logo a {color:#FFF !important; font-size:2em; }
+.logo a:hover {color:#0088CC}
+
+.currentCrossLink i {
+ color:rgb(0,0,0) !important; 
+}
+/*  end */
+
 #wrapper {
   width:980px;
   margin:0 auto;  
-  margin-top:35px;
+  margin:35px 0 50px 40px;
+}
 
+#footer {
+  line-height: 65px;
+  padding-right:20px;
+  text-align:right;
+  background: #FFF;
+  border-radius: 4px;
+  min-height: 59px;
+  width: 940px;
+  margin-left: 85px;  
 }
 
 #slider-id,.editWrapper {
-min-height:300px;
+  min-height:300px;
 box-shadow: 0 0 3px rgba(200,200,200,0.5);
-border-radius: 4px;  
-/*padding-top:75px;*/
+  border-radius: 4px;  
+
 }
 
 .editWrapper{
-    padding-top:50px;
-    background: #f2f2f2;
+  padding-top:50px;
+  background: #f2f2f2;
 }
 
 .urlsaver input  {
@@ -50,22 +81,47 @@ height: 47px;
 
 /* NAVIGATION */
 .slideNav {
- width:435px;
- float:right; 
+  width:435px;
+  float:right; 
+  border-radius:4px;
 }
+
+.slideNav a {color:#000 !important;}
+
+
+/* borders defined here */
+ #slider-id,.editWrapper,#footer {
+border:5px solid #CCC;  
+}
+
+#footer {
+border:2px solid #CCC;  
+}
+
+/* end */
 
 .logo {
 font-size: 2em;
 position: absolute;
-margin-left: 30px;
+margin-left: 57px;
 margin-top: -7px;
 }
-.logo a { font-size:2em; }
 
-.panel-wrapper pre {margin-top:25px;}
+
+
+.panel-wrapper pre {
+width: 700px;
+margin: 0 auto;
+margin-top: 50px;
+}
+
+.dragExplain {
+  
+}
+
 
 /* FLASH NOTICES*/
-#error_explanation {color:red;}
+#error_explanation {color:rgba(244,46,70,.70);}
 
 #notice {
   width:100%;
@@ -92,3 +148,35 @@ margin-top: -7px;
   text-decoration: none  !important;
 }
 
+
+
+.transparency50 {
+  /* Required for IE 5, 6, 7 */
+  /* ...or something to trigger hasLayout, like zoom: 1; */
+  width: 100%; 
+    
+  /* Theoretically for IE 8 & 9 (more valid) */ 
+  /* ...but not required as filter works too */
+  /* should come BEFORE filter */
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  
+  /* This works in IE 8 & 9 too */
+  /* ... but also 5, 6, 7 */
+  filter: alpha(opacity=50);
+  
+  /* Older than Firefox 0.9 */
+  -moz-opacity:0.5;
+  
+  /* Safari 1.x (pre WebKit!) */
+  -khtml-opacity: 0.5;
+    
+  /* Modern!
+  /* Firefox 0.9+, Safari 2?, Chrome any?
+  /* Opera 9+, IE 9+ */
+  opacity: 0.5;
+}
+
+
+.explanation {
+  color:#000 !important;
+}

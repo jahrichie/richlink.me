@@ -1,4 +1,9 @@
  $(function(){
+           //close flash message manually
+          $('[data-behavior~=closeMe]').click(function () {
+            $('[data-behavior~=slideUp]').slideUp(400);
+          }); 
+          
           //main coda slider call, doesn;t work with data-behavior
           $('#slider-id').liquidSlider({
             responsive: false,
@@ -11,12 +16,10 @@
             dynamicTabs: false,
             crossLinks: true
           });
-          //Slide flash message out.
-          $('[data-behavior~=slideUp]').delay(5000).slideUp(400);
+          //Slide flash message out automatically.
+          // $('[data-behavior~=slideUp]').delay(5000).slideUp(400);
+
   });
 
-   //close flash message manually
-  $('[data-behavior~=closeMe]').click(function () {
-    $('[data-behavior~=slideUp]').slideUp(400);
-  });           
+          
 

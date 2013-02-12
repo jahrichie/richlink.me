@@ -1,0 +1,23 @@
+/*
+FONTS
+font-family: 'Droid Serif', serif;
+font-family: 'Oswald', sans-serif;
+font-family: 'Nobile', sans-serif;
+
+
+*/
+
+
+/* MY SERIF*/
+.h2,
+.title
+{
+ font-family: 'Droid Serif', serif;
+
+}
+
+/* MY SANS-SERIF*/
+p {
+  color:red;
+  font-family: 'Open Sans', sans-serif;
+}

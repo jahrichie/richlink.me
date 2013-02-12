@@ -1,11 +1,11 @@
 <%= form_for(@link, :html => { "data-behavior" => "submit-form", :class => 'clearfix'}) do |f| %>
   <% if @link.errors.any? %>
     <style type="text/css">
-      .actions input,#link_url {border:1px solid red;}
+      .actions input,#link_url {border:1px solid rgba(244,46,70,.40);}
     </style>
     <div id="error_explanation">
       <h2><%= pluralize(@link.errors.count, "error") %> 
-         yo, please resolve!:
+         yo, please resolve:
       </h2>
       <ol>
       <% @link.errors.full_messages.each do |msg| %>
@@ -24,7 +24,7 @@
       <% end %>
   </div>
   <div class="actions">
-    <%= f.submit 'Save', :class => 'btn floatLeft' %>
+    <%= f.submit 'Save', :class => 'btn floatLeft greenGradient' %>
   </div>
   <br><br>
 <% end %>
@@ -41,5 +41,6 @@
 
 <% end %>
 <div class="clearfix">&nbsp;</div>
- 
+
+
 

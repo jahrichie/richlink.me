@@ -160,8 +160,10 @@
   background: #f2f2f2;
 }
 .currentCrossLink {
-  font-weight: bold;
+  box-shadow: 0 0 3px #CCC;
+  background:rgba(200,200,200,0.5);
 }
+
 .liquid-slider-wrapper .liquid-nav ul {  
   padding:0;
   /* Do not edit below this line */

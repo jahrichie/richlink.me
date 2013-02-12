@@ -6105,7 +6105,60 @@ button.close {
 
 
 
+ 
 
-.currentCrossLink {
-  background: rgba(200,200,200,.45);
+
+
+/* DEFINE THOSE CSS GRADIENTS SON */
+
+.greenGradient {
+box-shadow: 0 0 3px rgba(255,255,255,0.9);  
+background: #A4D57C; /* Old browsers */
+background: -moz-linear-gradient(top, #a9db80 0%, #96c56f 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9db80), color-stop(100%,#96c56f)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* IE10+ */
+background: linear-gradient(to bottom, #a9db80 0%,#96c56f 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db80', endColorstr='#96c56f',GradientType=0 ); /* IE6-9 */
+color:#FFF;
+text-shadow: 0 0 3px rgba(0,0,0,0.9);
+}
+
+.greenGradient:hover {
+color:#0088CC;
+text-shadow: 0 0 3px rgba(255,255,255,0.9);  
+
+
+background: #A4D57C; /* Old browsers */
+background: -moz-linear-gradient(top, #a9db80 0%, #96c56f 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9db80), color-stop(100%,#96c56f)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* IE10+ */
+background: linear-gradient(to bottom, #a9db80 0%,#96c56f 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db80', endColorstr='#96c56f',GradientType=0 ); /* IE6-9 */
+
+
+  opacity: 0.8;
+
+
+  /* Theoretically for IE 8 & 9 (more valid) */ 
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  
+  /* This works in IE 8 & 9 too */
+  /* ... but also 5, 6, 7 */
+  filter: alpha(opacity=80);
+  
+  /* Older than Firefox 0.9 */
+  -moz-opacity:0.8;
+  
+  /* Safari 1.x (pre WebKit!) */
+  -khtml-opacity: 0.8;
+  /* Modern!
+  /* Firefox 0.9+, Safari 2?, Chrome any?
+  /* Opera 9+, IE 9+ */
+  opacity: 0.8;
+
+
 }
