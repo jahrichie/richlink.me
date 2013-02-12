@@ -13,13 +13,13 @@ body {
 }
 
 #backgroundStamp {
-  position:absolute;
+/*  position:absolute;
   margin-top:200px;
   right:-60px;
   width:280px;
   height:191px;
   background: url(/assets/bgstamp.png);
-  background-repeat:no-repeat;
+  background-repeat:no-repeat;*/
 
 }
 
