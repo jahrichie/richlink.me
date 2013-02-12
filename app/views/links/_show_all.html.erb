@@ -24,7 +24,18 @@
 
 <% @links.each do |link| %>
   <tr class="<%= link.id %>">
-    <td><%= image_tag link.favicon, :height => "16px", :width => "16px" if link.favicon  %></td>
+    <td>
+
+      <% if link.favicon %>
+        <%= image_tag link.favicon, :height => "16px", :width => "16px" %>
+      <% elsif !link.url.split('/')[2].nil? %>
+        <img src="<%= "http://" + link.url.split('/')[2]%>/favicon.ico"
+        width="16px" height="16px">
+      <% end %>
+
+      <%= link.url.split('/')[2]%>
+
+    </td>
     <td style="max-width:400px"><%= link.name %></td>
     <td><%= link_to "<i class='icon-external-link'></i> #{truncate(link.url, :length => 60)}".html_safe, link.url, :target => "_blank" %></td>
       <td><%= link_to '<i  class="icon-edit"> Edit </i>'.html_safe, edit_link_path(link), :class => 'iframe', :id=> "various5" %></td>
