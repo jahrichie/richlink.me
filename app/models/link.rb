@@ -20,7 +20,7 @@ class Link < ActiveRecord::Base
 
   #search method for will_pag
   def self.search(search, page)
-  paginate :per_page => 20, :page => page,
+  paginate :per_page => 10, :page => page,
            :conditions => ['url like ?', "%#{search}%"], :order => 'url'
   end
 
