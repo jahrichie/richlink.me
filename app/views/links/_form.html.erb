@@ -4,7 +4,7 @@
       .actions input,#link_url {border:1px solid rgba(244,46,70,.40);}
     </style>
     <div id="error_explanation">
-      <h2><i class='icon-warning-sign' style='color:red;'>&nbsp; </i> <%= pluralize(@link.errors.count, "error") %>. darn. please fix:
+      <h2><i class='icon-warning-sign' style='color:red;'>&nbsp; </i> <%= pluralize(@link.errors.count, "error") %> . darn. please fix:
       </h2>
       <ol>
       <% @link.errors.full_messages.each do |msg| %>

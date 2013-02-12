@@ -3,7 +3,7 @@ JAHS LINKS GRABBER
 
 */
 body {
-  background: url(/assets/black-grad-bg.jpg) no-repeat center center fixed;
+  background: url(/assets/black-bg-by-soigital.jpg) no-repeat center center fixed;
   -webkit-background-size:cover;
   -moz-background-size:cover;
   -o-background-size:cover;
@@ -117,6 +117,10 @@ font-size: 2em;
 position: absolute;
 margin-left: 57px;
 margin-top: -7px;
+}
+
+.logo {
+ /**/
 }
 
 
