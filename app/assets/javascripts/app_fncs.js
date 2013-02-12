@@ -5,7 +5,7 @@
           }); 
           
           //main coda slider call, doesn;t work with data-behavior
-          $('#slider-id').liquidSlider({
+          $('#slider-id').delay(5000).liquidSlider({
             responsive: false,
             autoSlide:false,
             autoHeight:true,
