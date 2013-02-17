@@ -18,7 +18,11 @@
             hashNames: true,
             hashCrossLinks: true,
             dynamicTabs: false,
-            crossLinks: true
+            crossLinks: true,
+            keyboardNavigation: true,
+            leftKey: 39,
+            rightKey: 37,
+
           });
           //Slide flash message out automatically.
           // $('[data-behavior~=slideUp]').delay(5000).slideUp(400);

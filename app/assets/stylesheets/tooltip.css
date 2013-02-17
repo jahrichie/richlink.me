@@ -1,10 +1,10 @@
 
 #tooltip
 {
+    width:800px;
     box-shadow: 0 0 3px rgba(200,200,200,0.5);
-    text-align: center;
     color: #fff;
-    background: #111;
+     background: url(/assets/blue-grad-bg.jpg) repeat;
     position: absolute;
     z-index: 100;
     padding: 15px;
@@ -17,7 +17,7 @@
         height: 0;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
-        border-top: 10px solid #111;
+        border-top: 10px solid #0088CC;
         content: '';
         position: absolute;
         left: 50%;
