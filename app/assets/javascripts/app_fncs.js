@@ -1,5 +1,9 @@
  $(function(){
-           //close flash message manually
+          //hide the fadein element with js and then fade it back in
+          $('[data-behavior~=fadein]').hide();
+          $('[data-behavior~=fadein]').fadeIn(1000);
+           
+          //close flash message manually
           $('[data-behavior~=closeMe]').click(function () {
             $('[data-behavior~=slideUp]').slideUp(400);
           }); 

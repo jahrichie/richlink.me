@@ -33,6 +33,7 @@ body {
 .icon-link {color:#FFF;}
 .icon-heart {color:#F42E46;}
 
+.logo a{font-family: 'Satisfy', cursive;}
 .logo a {color:#FFF !important; font-size:2em; }
 .logo a:hover {color:#0088CC}
 
