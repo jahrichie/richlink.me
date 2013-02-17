@@ -17,7 +17,6 @@ font-family: 'Nobile', sans-serif;
 }
 
 /* MY SANS-SERIF*/
-p {
-  color:red;
+p,#tooltip {
   font-family: 'Open Sans', sans-serif;
 }
