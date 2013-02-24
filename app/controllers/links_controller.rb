@@ -76,10 +76,19 @@ class LinksController < ApplicationController
     end
     @link.favicon = doc.favicon
 
+
+
     paginate_all_links
     respond_to do |format|
       if @link.save
-        format.html { redirect_to root_url+"#show-links", notice: 'Link was successfully created.' }
+          #if using bookmarklet foward back to link you came from
+          if request.referer =~ /autosave/
+            format.html { redirect_to @link.url }
+          else
+          #if using frontpage redirect to show all links  
+            format.html { redirect_to root_url+"#show-links", notice: 'Link was successfully created.' }
+          end
+        format.html { redirect_to @link.url, notice: 'Link was successfully created.' }
         format.json { render json: @link, status: :created, location: @link }
       else
         format.html { render action: "new" }
