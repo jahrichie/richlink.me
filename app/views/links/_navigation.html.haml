@@ -1,0 +1,20 @@
+.logo
+  = link_to 'rich<i class="icon-link"></i> .me'.html_safe, root_url, |
+    :class => 'removeborder'                                         |
+.clearfix &nbsp;
+.slideNav.navbar.clearfix
+  .navbar-inner
+    %ul.nav{"data-liquidslider-ref" => "slider-id"}
+      %li
+        %a{"data-liquidslider-ref" => "slider-id", :href => "#make-links"}
+          %i.icon-fire>
+          Make a Link
+      - if @links.size > 0
+        %li
+          %a{"data-liquidslider-ref" => "slider-id", :href => "#show-links"}
+            %i.icon-eye-open
+            Show links
+      %li
+        %a{"data-liquidslider-ref" => "slider-id", :href => "#bookmarklet"}
+          %i.icon-fighter-jet
+          Bookmarklet

@@ -1,0 +1,28 @@
+= render 'navigation'
+#slider-id.liquid-slider{"data-behavior" => "fadein"}
+  .formSlider
+    %h2.title{:style => "float:left"} Make Links
+    %abbr.tooltipper{:rel => "tooltip", :title => "<ol><li>This app saves links for rich to read. That's it. Use the bookmarklet to save links while on other sites.</li><br><li>Also, you can use the left, right, 1, 2, and 3 keyboard shortcuts to navigate. thanks!</li></ol>"}
+      What is this
+      %i.icon-question-sign
+    .clearfix &nbsp;
+    = render 'form'
+  / end make links slide
+  %div
+    %h2.title Show Links
+    = render 'show_all'
+  / end show links slide
+  %div
+    %h2.title Bookmarklet
+    %span.dragExplain
+      Drag
+      = succeed "," do
+        %a{:href => "javascript:void(location.href='#{root_url}?autosave='%20+%20encodeURIComponent(location.href));", :style => "text-align:center;"} this link
+      or highlight the code below, and put it where your bookmarklets live.  When you wana' save a link click it from any webpage you're on!
+    %pre
+      javascript:void(location.href='#{root_url}?autosave='%20+%20encodeURIComponent(location.href));
+  / end show links slide
+/ end slider-id
+%br/
+%br/
+%br/

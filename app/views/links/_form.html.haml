@@ -1,0 +1,33 @@
+= form_for(@link, :html => { "data-behavior" => "submit-form", :class => 'clearfix'}) do |f|
+  - if @link.errors.any?
+    :css
+      .actions input,#link_url {border:1px solid rgba(244,46,70,.40);}
+        #error_explanation
+      %h2
+        %i.icon-warning-sign{:style => "color:red;"} &nbsp;
+        = pluralize(@link.errors.count, "error")
+        \. darn. please fix:
+      %ol
+        - @link.errors.full_messages.each do |msg|
+          %li= msg
+  = f.hidden_field :name, :value => @link_title
+  = f.hidden_field :remarks, :value => params[:remarks]
+  .field.urlsaver
+    - if params[:autosave]
+      = f.text_field :url, :value => params[:autosave]
+    - else
+      = f.text_field :url
+  - if params[:notes]
+    = f.hidden_field :remarks, :value => params[:notes]
+  .actions
+    = f.submit 'Save', :class => 'btn floatLeft greenGradient'
+  %br/
+  %br/
+- if params[:autosave]
+  :javascript
+    $(function() {
+      $('[data-behavior~=submit-form]').submit();
+    });
+
+    
+      .clearfix &nbsp;

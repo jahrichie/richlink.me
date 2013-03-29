@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %title Links
+    / !!!! FONTS. GET THESE FIRST !!!!
+    %link{:href => "http://fonts.googleapis.com/css?family=Droid+Serif|Satisfy|Oswald|Nobile|Open+Sans", :rel => "stylesheet", :type => "text/css"}/
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = javascript_include_tag '/jquery.fancybox.js'
+    = stylesheet_link_tag    "/jquery.fancybox.css"
+  %body
+    #backgroundStamp &nbsp;
+    - if notice
+      %p#notice{"data-behavior" => "slideUp"}
+        = notice
+        %a.removeborder{"data-behavior" => "closeMe", :href => "javascript:void(0);"}
+          %i.icon-remove &nbsp;
+    #wrapper
+      = yield
+      #footer
+        %i.icon-heart &nbsp;
+        Lovingly made on (Rails #{Rails.version})  (Ruby #{RUBY_VERSION}) by
+        %a{:href => "http://sodigit.al", :target => "_blank"} sodigit.al
+        %img{:src => "/assets/glasses-son.gif"}/
+    / end wrapper

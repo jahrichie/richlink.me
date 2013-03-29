@@ -1,0 +1,21 @@
+= render 'navigation'
+#slider-id.liquid-slider
+  %div
+    %h2.title Make Links
+    = render 'form'
+  / end make links slide
+  - if @links.size > 0
+    %div
+      %h2.title Show Links
+      = render 'show_all'
+    / end show links slide
+  %div
+    %h2.title Bookmarklet
+    %a{:href => "javascript:void(location.href='#{root_url}?autosave='%20+%20encodeURIComponent(location.href));", :style => "text-align:center;width:300px"} Drag this link, or highlight the code below, and put it where your bookmarklets live. The and click it from any webpage you'd like him to read!
+    %pre
+      javascript:void(location.href='#{root_url}?autosave='%20+%20encodeURIComponent(location.href));
+  / end show links slide
+/ end slider-id
+%br/
+%br/
+%br/
