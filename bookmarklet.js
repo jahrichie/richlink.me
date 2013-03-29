@@ -1,1 +1,1 @@
-javascript:void(location.href='http://safe-bastion-2847.herokuapp.com/?link='%20+%20encodeURIComponent(location.href)#make-links);
+javascript:void(n = prompt("Notes??"),location.href='http://charitybuzz.dev:3000/?notes='+ n +'&autosave=' + encodeURIComponent(location.href));
