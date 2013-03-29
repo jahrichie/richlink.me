@@ -1,6 +1,5 @@
 class Link < ActiveRecord::Base
-  attr_accessible :name, :url
-  #require  'pismo'
+  attr_accessible :name, :url, :remarks
   
   ################## 
   # VALIDATIONS

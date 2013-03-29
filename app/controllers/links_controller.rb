@@ -76,8 +76,6 @@ class LinksController < ApplicationController
     end
     @link.favicon = doc.favicon
 
-
-
     paginate_all_links
     respond_to do |format|
       if @link.save

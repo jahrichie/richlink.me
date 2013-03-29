@@ -15,6 +15,7 @@
 
 </head>
 <body>
+
   <div id="backgroundStamp">&nbsp;</div>
   <% if notice %>
     <p id="notice" data-behavior="slideUp">
@@ -28,7 +29,7 @@
     <%= yield %>
 
     <div id="footer">
-      <i class="icon-heart">&nbsp;</i> Lovingly  made on Rails by   
+      <i class="icon-heart">&nbsp;</i> Lovingly made on (Rails <%= Rails.version %>)  (Ruby <%= RUBY_VERSION %>) by   
       <a href="http://sodigit.al" target="_blank">sodigit.al</a>
       <img src="/assets/glasses-son.gif">
     </div>
