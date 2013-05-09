@@ -1,6 +1,5 @@
 class LinksController < ApplicationController
 
-
   # NOT NEEDED USING THIS IN NEW
   # GET /links
   # GET /links.json
@@ -68,13 +67,17 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(params[:link])
     doc = Pismo::Document.new(@link.url) 
-    #grab metadata from url
+    #grab metadata from doc
     if doc.title.nil?
       @link.name = doc.description
     else
       @link.name = doc.title
     end
     @link.favicon = doc.favicon
+
+    #FOR OFFLINE USE
+    #@link.name = "Offline Description"
+
 
 
 

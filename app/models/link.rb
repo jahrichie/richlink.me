@@ -5,9 +5,9 @@ class Link < ActiveRecord::Base
   # VALIDATIONS
   ################## 
   validates_presence_of :url, :message => " cannot be blank, that wouldn't be a url!"
-  validates_uniqueness_of :url, :message => " has already been added. 2.0 I'll allow duplicates and count frequency, but right now, one at a time please."
+  #validates_uniqueness_of :url, :message => " has already been added. 2.0 I'll allow duplicates and count frequency, but right now, one at a time please."
   # wack way of deciphering link structure, switch to a gem!
-  validates_format_of :url, :with => URI::regexp(%w(http https)), :message  => "'s have http or https in them, silly."
+  #validates_format_of :url, :with => URI::regexp(%w(http https)), :message  => "'s have http or https in them, silly."
 
   ################## 
   
